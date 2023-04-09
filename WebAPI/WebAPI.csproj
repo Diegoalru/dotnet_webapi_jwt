@@ -7,7 +7,7 @@
 
     <!-- Docker  -->
     <RuntimeIdentifiers>linux-x64;linux-arm64</RuntimeIdentifiers>     
-    <ContainerImageTags>latest;1.0.1</ContainerImageTags>
+    <ContainerImageTags>latest;1.0.0</ContainerImageTags>
     <ContainerImageName>diegoalru/webapijwt</ContainerImageName>
     <!-- <ContainerRegistry>registry.hub.docker.com</ContainerRegistry> -->
     <PublishProfile>DefaultContainer</PublishProfile>
