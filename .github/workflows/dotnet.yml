@@ -2,7 +2,7 @@
 name: ci
 on:
   push:
-    branches: [Github-Actions]
+    branches: [master]
 env:
   dotnet-version: 7.0.202
   project-directory: ./WebAPI/
