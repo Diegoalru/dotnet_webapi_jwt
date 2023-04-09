@@ -25,4 +25,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/webapijwt:latest;${{ secrets.DOCKER_USERNAME }}/webapijwt:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/webapijwt:latest;${{ secrets.DOCKER_USERNAME }}/webapijwt:1.0.1
