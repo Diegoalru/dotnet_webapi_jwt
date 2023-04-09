@@ -1,0 +1,46 @@
+# This workflow will build and push a Docker container to Docker Hub
+name: ci
+on:
+  push:
+    branches: [master]
+env:
+  dotnet-version: 7.0.202
+  project-directory: ./WebAPI/
+  docker-image-name: webapijwt
+jobs:
+  build:
+    name: Build, Test and Push Docker image.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.dotnet-version }}
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.project-directory }}
+      - name: Build
+        run: dotnet build --configuration Release --no-restore ${{ env.project-directory }}
+      - name: Test
+        run: dotnet test --configuration Release --no-build ${{ env.project-directory }}
+  docker:
+    name: Build and Push Docker image
+    runs-on: ubuntu-latest
+    needs: 
+      - build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Clean
+        run: docker builder prune --force
+      - name: Build Docker image
+        working-directory: ${{ env.project-directory }}
+        run: dotnet publish -c Release -o ./WebAPI/
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.docker-image-name }} --all-tags

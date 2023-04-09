@@ -5,12 +5,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 
-    <!-- Docker  -->
-    <RuntimeIdentifiers>linux-x64;linux-arm64</RuntimeIdentifiers>     
+    <!-- Docker -->
     <ContainerImageName>diegoalru/webapijwt</ContainerImageName>
-    <ContainerImageTags>latest;1.0.1</ContainerImageTags>
-    <ContainerRegistry>registry.hub.docker.com</ContainerRegistry>
-    <!-- <ContainerRegistry>docker.io</ContainerRegistry> -->
+    <RuntimeIdentifiers>linux-arm64;linux-x64</RuntimeIdentifiers>
+    <ContainerImageTags>latest;1.0.0</ContainerImageTags>
     <PublishProfile>DefaultContainer</PublishProfile>
 
   </PropertyGroup>
