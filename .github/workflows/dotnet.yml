@@ -9,7 +9,7 @@ env:
   docker-image-name: webapijwt
 jobs:
   build:
-    name: Build, Test and Push Docker image.
+    name: Restore, Build and Test .NET Core project.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
