@@ -37,4 +37,4 @@ jobs:
         working-directory: ./WebAPI/
         run: dotnet publish -c Release
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/webapi --all-tags
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/webapijwt --all-tags
