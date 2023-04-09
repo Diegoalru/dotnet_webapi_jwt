@@ -1,20 +1,28 @@
-on: 
+on:
   push:
-    branches: [ Github-Actions ]
+    branches: [Github-Actions]
 name: dotnet
 jobs:
   build:
+    name: Build, Test and Push Docker image.
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 7.0.202
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
-    - name: Test with dotnet
-      run: dotnet test --configuration Release --no-build
-    - name: Publish with dotnet
-      run: dotnet publish --configuration Release --no-build
-    
+      - uses: actions/checkout@master
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.202
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+      - name: Test with dotnet
+        run: dotnet test --configuration Release --no-build
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/webapijwt:latest;${{ secrets.DOCKER_USERNAME }}/webapijwt:${{ github.sha }}
