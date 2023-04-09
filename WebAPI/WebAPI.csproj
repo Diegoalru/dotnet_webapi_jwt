@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Docker  -->
+    <RuntimeIdentifiers>linux-x64;linux-arm64</RuntimeIdentifiers>     
+    <ContainerImageName>diegoalru/webapijwt</ContainerImageName>
+    <ContainerImageTags>latest;1.0.1</ContainerImageTags>
+    <ContainerRegistry>registry.hub.docker.com</ContainerRegistry>
+    <!-- <ContainerRegistry>docker.io</ContainerRegistry> -->
+    <PublishProfile>DefaultContainer</PublishProfile>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
+    <PackageReference Include="Microsoft.NET.Build.Containers" Version="0.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+
+    <!-- Container Port -->
+    <ContainerPort Include="80" Type="tcp" />
+  </ItemGroup>
+
+</Project>
